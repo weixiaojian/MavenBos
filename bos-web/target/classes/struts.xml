@@ -4,10 +4,27 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<constant name="struts.devMode" value="false" />
-	<!-- 
-		<constant name="struts.objectFactory" value="spring"/>
-	 -->
+	
 	<package name="basicstruts2" extends="struts-default">
+		<interceptors>
+			<!-- 1.注册自定义拦截器 -->
+			<interceptor name="bosLoginInterceptor" class="com.imwj.bos.web.interrceptor.BOSLoginInterceptor">
+				<param name="excludeMethods">login</param><!-- 指定那些方法不用拦截 -->
+			</interceptor>
+			<!-- 2.定义拦截器栈 -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="bosLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 3.配置默认拦截器 -->
+		<default-interceptor-ref name="myStack"/>
+	
+		<!-- 全局结果集配置 -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
 		<!-- 需要进行权限控制的页面访问 -->
 		<action name="page_*_*">
 			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
@@ -15,7 +32,6 @@
 		
 		<!-- 用户管理 -->
 		<action name="userAction_*" class="userAction" method="{1}">
-			<result name="login">/login.jsp</result>
 			<result name="home">/index.jsp</result>
 		</action>
 	</package>

@@ -1,12 +1,13 @@
 package com.imwj.bos.dao.base.impl;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -57,6 +58,19 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 	public List<T> findAll() {
 		String hql = "from "+entityClass.getSimpleName()+"";
 		return (List<T>) this.getHibernateTemplate().find(hql);
+	}
+
+	@Override
+	public void excuteUpdate(String queryName, Object... objects) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		Query query = session.getNamedQuery(queryName);
+		int i = 0;
+		for (Object object : objects) {
+			//为hql语句中的？赋值
+			query.setParameter(i++, object);
+		}
+		//执行更新
+		query.executeUpdate();
 	}
 
 }

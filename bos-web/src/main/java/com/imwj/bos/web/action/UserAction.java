@@ -2,8 +2,12 @@ package com.imwj.bos.web.action;
 
 import com.imwj.bos.domain.User;
 import com.imwj.bos.service.IUserService;
+import com.imwj.bos.utils.BOSUtils;
 import com.imwj.bos.web.action.base.BaseAction;
 import com.opensymphony.xwork2.ActionContext;
+
+import java.io.IOException;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -64,6 +68,26 @@ public class UserAction extends BaseAction<User>  {
 	public String logout(){
 		ServletActionContext.getRequest().getSession().invalidate();
 		return LOGIN;
+	}
+	
+	/**
+	 * 用户修改密码
+	 * @return
+	 * @throws Exception 
+	 */
+	public String editPassword() throws Exception{
+		String f = "1";
+		//获取当前用户
+		User loginUser = BOSUtils.getLoginUser();
+		try{
+			userService.editPasswod(loginUser.getId(),model.getPassword());
+		}catch(Exception e){
+			f = "0";
+			e.printStackTrace();
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+		ServletActionContext.getResponse().getWriter().print(f);
+		return NONE;
 	}
 	
 }

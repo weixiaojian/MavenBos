@@ -6,4 +6,6 @@ public interface IUserService {
 
 	User login(User model);
 
+	void editPasswod(String id, String password);
+
 }

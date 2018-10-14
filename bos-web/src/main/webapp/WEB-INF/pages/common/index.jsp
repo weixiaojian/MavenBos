@@ -85,7 +85,29 @@
 		});
 		
 		$("#btnEp").click(function(){
-			alert("修改密码");
+			//进行表单校验
+			var v = $("#editPasswordForm").form("validate");
+			if(v){
+				//表单校验通过，手动校验两次输入是否一致
+				var v1 = $("#txtNewPass").val();
+				var v2 = $("#txtRePass").val();
+				if(v1 == v2){
+					//两次输入一致，发送ajax请求
+					$.post("userAction_editPassword.action",{"password":v1},function(data){
+						if(data == '1'){
+							//修改成功，弹出提示,关闭修改密码窗口
+							$.messager.alert("提示信息","密码修改成功！","info");
+							$("#editPwdWindow").window("close");
+						}else{
+							//修改密码失败，弹出提示
+							$.messager.alert("提示信息","密码修改失败！","error");
+						}
+					});
+				}else{
+					//两次输入不一致，弹出错误提示
+					$.messager.alert("提示信息","两次密码输入不一致！","warning");
+				}
+			}
 		});
 	});
 
@@ -154,6 +176,7 @@
 	function showAbout(){
 		$.messager.alert("宅急送 v1.0","管理员邮箱: 2916863213@qq.com");
 	}
+	
 </script>
 </head>
 <body class="easyui-layout">
@@ -231,11 +254,11 @@
                 <table cellpadding=3>
                     <tr>
                         <td>新密码：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
+                        <td><input  required="true" data-options="validType:'length[4,6]'" id="txtNewPass" type="Password" class="txt01 easyui-validatebox" /></td>
                     </tr>
                     <tr>
                         <td>确认密码：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
+                        <td><input  required="true" data-options="validType:'length[4,6]'" id="txtRePass" type="Password" class="txt01 easyui-validatebox" /></td>
                     </tr>
                 </table>
             </div>
