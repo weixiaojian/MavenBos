@@ -50,7 +50,7 @@
 	</bean>
 	
 	<!-- 组件扫描 -->
-	<context:component-scan base-package="com.itheima.bos"/>
+	<context:component-scan base-package="com.imwj.bos"/>
 	
 	<!-- 支持spring注解 -->
 	<context:annotation-config/>
