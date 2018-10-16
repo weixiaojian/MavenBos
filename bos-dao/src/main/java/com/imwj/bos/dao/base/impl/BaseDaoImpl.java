@@ -9,9 +9,12 @@ import javax.annotation.Resource;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.imwj.bos.dao.base.IBaseDao;
+import com.imwj.bos.utils.PageQuery;
 /**
  *	持久层的通用实现
  * @author SpongBob
@@ -71,6 +74,26 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		}
 		//执行更新
 		query.executeUpdate();
+	}
+
+	@Override
+	public void findPageQuery(PageQuery pageQuery) {
+		int currentPage = pageQuery.getCurrentPage();
+		int pageSize = pageQuery.getPageSize();
+		DetachedCriteria dc = pageQuery.getDetachedCriteria();
+		
+		//查询总记录数
+		dc.setProjection(Projections.rowCount());
+		List<Long> list = (List<Long>) this.getHibernateTemplate().findByCriteria(dc);
+		int total = list.get(0).intValue();
+		pageQuery.setTotal(total);
+		
+		//查询分页数据
+		dc.setProjection(null);//清除之前的查询条件
+		int firstResult = (currentPage-1)*pageSize;
+		int maxResults = pageSize;
+		List rows = this.getHibernateTemplate().findByCriteria(dc, firstResult, maxResults);
+		pageQuery.setRows(rows);
 	}
 
 }
