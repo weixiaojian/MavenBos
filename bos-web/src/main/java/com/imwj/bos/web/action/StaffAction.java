@@ -54,8 +54,34 @@ public class StaffAction extends BaseAction<Staff>  {
 		return NONE;
 	}
 	
+	/**
+	 * 取派员批量删除
+	 * @return
+	 */
+	private String ids;
+	public String deleteBatch(){
+		staffService.deleteBatchByIdes(ids);
+		return LIST;
+	}
 	
-	
+	/**
+	 * 取派员修改
+	 * @return
+	 */
+	public String edit(){
+		//先根据id查询
+		Staff staff = staffService.findStaffById(model.getId());
+		//替换原先staff中的内容
+		staff.setName(model.getName());
+		staff.setTelephone(model.getTelephone());
+		staff.setHaspda(model.getHaspda());
+		staff.setStandard(model.getStandard());
+		staff.setStation(model.getStation());
+		//保存staff
+		staffService.update(staff);
+		
+		return LIST;
+	}
 	
 	public int getPage() {
 		return page;
@@ -69,4 +95,11 @@ public class StaffAction extends BaseAction<Staff>  {
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+	public String getIds() {
+		return ids;
+	}
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	
 }

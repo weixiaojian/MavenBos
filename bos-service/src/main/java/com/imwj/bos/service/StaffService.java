@@ -9,4 +9,10 @@ public interface StaffService {
 
 	void findPageQuery(PageQuery pageQuery);
 
+	void deleteBatchByIdes(String ids);
+
+	Staff findStaffById(String id);
+
+	void update(Staff staff);
+
 }
