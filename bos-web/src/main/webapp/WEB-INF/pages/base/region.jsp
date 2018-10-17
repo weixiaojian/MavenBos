@@ -26,6 +26,7 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.ocupload-1.1.2.js"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -132,6 +133,13 @@
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
+
+	$(function(){
+		$("#button-import").upload({
+			action:'regionAction_importXls.action',
+			name:'regionFile'
+		});
+	});
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
