@@ -31,6 +31,15 @@ public class SubareaAction extends BaseAction<Subarea> {
 		subareaServicce.add(model);
 		return LIST;
 	}
+	
+	/**
+	 * 分区分页列表
+	 */
+	public String pageQuery()throws Exception{
+		subareaServicce.pageQuery(pageQuery);
+		this.javaToJson(pageQuery, new String[]{"currentPage","pageSize","detachedCriteria","decidedzone","subareas"});
+		return NONE;
+	}
 }
 
 
