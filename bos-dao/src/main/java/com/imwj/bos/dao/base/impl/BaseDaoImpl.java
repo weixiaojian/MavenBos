@@ -90,6 +90,8 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 		
 		//查询分页数据
 		dc.setProjection(null);//清除之前的查询条件
+		//指定hibernate框架封装对象的方式
+		dc.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
 		int firstResult = (currentPage-1)*pageSize;
 		int maxResults = pageSize;
 		List rows = this.getHibernateTemplate().findByCriteria(dc, firstResult, maxResults);
