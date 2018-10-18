@@ -15,9 +15,6 @@ public class UserServiceImpl implements IUserService{
 	
 	@Autowired
 	private IUserDao userDao;
-	public void setUserDao(IUserDao userDao) {
-		this.userDao = userDao;
-	}
 
 
 	//用户登陆
@@ -26,8 +23,7 @@ public class UserServiceImpl implements IUserService{
 		String password = MD5Utils.md5(model.getPassword());
 		return userDao.findUserByUsernameAndPassword(model.getUsername(),password);
 	}
-
-
+	
 	//用户修改密码
 	public void editPasswod(String id, String password) {
 		//使用md5加密密码

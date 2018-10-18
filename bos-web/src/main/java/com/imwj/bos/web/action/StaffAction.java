@@ -32,25 +32,10 @@ public class StaffAction extends BaseAction<Staff>  {
 	/**
 	 * 取派员列表分页显示
 	 */
-	private int page;
-	private int rows;
+	
 	public String pageQuery() throws Exception {
-		PageQuery pageQuery = new PageQuery();
-		pageQuery.setCurrentPage(page);
-		pageQuery.setPageSize(rows);
-		
-		//创建离线提交查询对象
-		DetachedCriteria dc = DetachedCriteria.forClass(Staff.class);
-		pageQuery.setDetachedCriteria(dc);
 		staffService.findPageQuery(pageQuery);
-		
-		//将pageQuery转换为json数据:
-		//JSONObject---将单一对象转为json  JSONArray----将数组或者集合对象转为json
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setExcludes(new String[]{"currentPage","detachedCriteria","pageSize"});
-		String json = JSONObject.fromObject(pageQuery).toString();
-		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
-		ServletActionContext.getResponse().getWriter().print(json);
+		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize"});
 		return NONE;
 	}
 	
@@ -83,18 +68,6 @@ public class StaffAction extends BaseAction<Staff>  {
 		return LIST;
 	}
 	
-	public int getPage() {
-		return page;
-	}
-	public void setPage(int page) {
-		this.page = page;
-	}
-	public int getRows() {
-		return rows;
-	}
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
 	public String getIds() {
 		return ids;
 	}
