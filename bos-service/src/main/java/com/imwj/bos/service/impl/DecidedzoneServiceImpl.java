@@ -9,6 +9,7 @@ import com.imwj.bos.dao.SubareaDao;
 import com.imwj.bos.domain.Decidedzone;
 import com.imwj.bos.domain.Subarea;
 import com.imwj.bos.service.DecidedzoneService;
+import com.imwj.bos.utils.PageQuery;
 
 @Service
 @Transactional
@@ -29,6 +30,10 @@ public class DecidedzoneServiceImpl implements DecidedzoneService{
 			//model.getSubareas().add(subarea);只需要一方关联：（一方）定区已经放弃维护外键权利，（多方）负责维护
 			subarea.setDecidedzone(model);//分区关联定区
 		}
+	}
+
+	public void pageQuery(PageQuery pageQuery) {
+		decidedzoneDao.findPageQuery(pageQuery);
 	}
 
 }

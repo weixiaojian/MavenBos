@@ -35,7 +35,7 @@ public class StaffAction extends BaseAction<Staff>  {
 	
 	public String pageQuery() throws Exception {
 		staffService.findPageQuery(pageQuery);
-		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize"});
+		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize","decidedzones"});
 		return NONE;
 	}
 	

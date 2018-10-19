@@ -115,7 +115,7 @@
 		// 先将body隐藏，再显示，不会出现页面刷新效果
 		$("body").css({visibility:"visible"});
 		
-		// 收派标准数据表格
+		// 定区表格
 		$('#grid').datagrid( {
 			iconCls : 'icon-forward',
 			fit : true,
@@ -125,7 +125,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/decidedzone.json",
+			url : "decidedzoneAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow

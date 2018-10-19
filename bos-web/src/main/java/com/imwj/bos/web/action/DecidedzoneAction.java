@@ -25,6 +25,16 @@ public class DecidedzoneAction extends BaseAction<Decidedzone> {
 		decidedzoneService.save(model,subareaid);
 		return LIST;
 	}
+	
+	/**
+	 * 定区分页列表显示
+	 * @return
+	 */
+	public String pageQuery(){
+		decidedzoneService.pageQuery(pageQuery);
+		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize","subareas","decidedzones"});
+		return NONE;
+	}
 
 	public void setSubareaid(String[] subareaid) {
 		this.subareaid = subareaid;
