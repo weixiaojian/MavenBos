@@ -2,6 +2,8 @@ package com.imwj.bos.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,14 @@ public class SubareaServiceImpl implements SubareaService{
 	@Override
 	public List<Subarea> findAll() {
 		return subareaDao.findAll();
+	}
+
+	@Override
+	public List<Subarea> findAllNotDecidedzone() {
+		//未关联到定区的分区：即decidedzone_id为null
+		DetachedCriteria dc = DetachedCriteria.forClass(Subarea.class);
+		dc.add(Restrictions.isNull("decidedzone"));
+		return subareaDao.findBycriteria(dc);
 	}
 	
 	

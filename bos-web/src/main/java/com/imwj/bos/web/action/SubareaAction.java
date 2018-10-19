@@ -129,6 +129,18 @@ public class SubareaAction extends BaseAction<Subarea> {
 		workbook.write(outputStream);
 		return	NONE;
 	}
+	
+	/**
+	 * 添加定区的关联分区ajx请求
+	 * @return
+	 */
+	public String listAjax(){
+		//得到list数据
+		List<Subarea> list = subareaService.findAllNotDecidedzone();
+		//转换成json字符串
+		javaToJson(list, new String[]{"region"});
+		return NONE;
+	}
 }
 
 

@@ -13,5 +13,7 @@ public interface SubareaService {
 
 	List<Subarea> findAll();
 
+	List<Subarea> findAllNotDecidedzone();
+
 
 }

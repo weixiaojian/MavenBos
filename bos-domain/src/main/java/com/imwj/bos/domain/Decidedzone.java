@@ -17,7 +17,7 @@ public class Decidedzone implements java.io.Serializable {
 	private Set subareas = new HashSet(0);
 
 	// Constructors
-
+	
 	/** default constructor */
 	public Decidedzone() {
 	}

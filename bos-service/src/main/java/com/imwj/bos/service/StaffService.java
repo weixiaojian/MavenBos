@@ -1,5 +1,7 @@
 package com.imwj.bos.service;
 
+import java.util.List;
+
 import com.imwj.bos.domain.Staff;
 import com.imwj.bos.utils.PageQuery;
 
@@ -14,5 +16,7 @@ public interface StaffService {
 	Staff findStaffById(String id);
 
 	void update(Staff staff);
+
+	List<Staff> finAllNoDelet();
 
 }

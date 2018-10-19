@@ -1,18 +1,18 @@
 package com.imwj.bos.web.action;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.imwj.bos.domain.Staff;
 import com.imwj.bos.service.StaffService;
-import com.imwj.bos.utils.PageQuery;
 import com.imwj.bos.web.action.base.BaseAction;
 
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 @Controller
 @Scope("prototype")
@@ -69,11 +69,16 @@ public class StaffAction extends BaseAction<Staff>  {
 	}
 	
 	/**
-	 * 添加定区的取拍员选择
+	 * 添加定区的取派员选择
 	 * @return
+	 * @throws Exception 
 	 */
-	public String listAjax(){
+	public String listAjax() throws Exception{
+		//得到所有数据
+		List<Staff> list = staffService.finAllNoDelet();
 		
+		//将数据转换成json
+		this.javaToJson(list, new String[]{"decidedzones"});
 		return NONE;
 	}
 	
