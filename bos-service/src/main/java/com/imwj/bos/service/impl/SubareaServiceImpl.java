@@ -1,5 +1,7 @@
 package com.imwj.bos.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,11 @@ public class SubareaServiceImpl implements SubareaService{
 	@Override
 	public void pageQuery(PageQuery pageQuery) {
 		subareaDao.findPageQuery(pageQuery);
+	}
+
+	@Override
+	public List<Subarea> findAll() {
+		return subareaDao.findAll();
 	}
 	
 	

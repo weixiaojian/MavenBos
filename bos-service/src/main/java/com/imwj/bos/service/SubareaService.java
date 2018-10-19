@@ -11,5 +11,7 @@ public interface SubareaService {
 
 	void pageQuery(PageQuery pageQuery);
 
+	List<Subarea> findAll();
+
 
 }

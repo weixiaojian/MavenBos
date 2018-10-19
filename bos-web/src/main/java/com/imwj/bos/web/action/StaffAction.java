@@ -68,6 +68,15 @@ public class StaffAction extends BaseAction<Staff>  {
 		return LIST;
 	}
 	
+	/**
+	 * 添加定区的取拍员选择
+	 * @return
+	 */
+	public String listAjax(){
+		
+		return NONE;
+	}
+	
 	public String getIds() {
 		return ids;
 	}

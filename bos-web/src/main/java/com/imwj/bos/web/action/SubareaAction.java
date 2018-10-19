@@ -2,7 +2,13 @@ package com.imwj.bos.web.action;
 
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import com.imwj.bos.domain.Region;
 import com.imwj.bos.domain.Subarea;
 import com.imwj.bos.service.SubareaService;
+import com.imwj.bos.utils.FileUtils;
 import com.imwj.bos.web.action.base.BaseAction;
 
 /**
@@ -76,6 +83,51 @@ public class SubareaAction extends BaseAction<Subarea> {
 		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize",
 						"decidedzone","subareas"});
 		return NONE;
+	}
+	
+	/**
+	 * 分区数据导出
+	 * @return
+	 * @throws Exception
+	 */
+	public String exprotXls()throws Exception{
+		//1.查询所有的分区数据
+		List<Subarea> list = subareaService.findAll();
+		
+		//2.使用POI将数据写入到excel中
+		//在内存中创建一个excel文件
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		//创建一个标签页
+		HSSFSheet sheet = workbook.createSheet("分区数据");
+		//创建标题行
+		HSSFRow headRow = sheet.createRow(0);
+		headRow.createCell(0).setCellValue("分区编号");
+		headRow.createCell(1).setCellValue("开始编号");
+		headRow.createCell(2).setCellValue("结束编号");
+		headRow.createCell(3).setCellValue("位置信息");
+		headRow.createCell(4).setCellValue("省市区");
+		
+		for(Subarea subarea : list){
+			HSSFRow dataRow = sheet.createRow(sheet.getLastRowNum()+1);
+			dataRow.createCell(0).setCellValue(subarea.getId());
+			dataRow.createCell(1).setCellValue(subarea.getStartnum());
+			dataRow.createCell(2).setCellValue(subarea.getEndnum());
+			dataRow.createCell(3).setCellValue(subarea.getPosition());
+			dataRow.createCell(4).setCellValue(subarea.getRegion().getName());
+		}
+		
+		//3.使用输出流下载一个文件
+		String fileName = "分区数据.xls";
+		String mimeType = ServletActionContext.getServletContext().getMimeType(fileName);
+		ServletOutputStream outputStream = ServletActionContext.getResponse().getOutputStream();
+		ServletActionContext.getResponse().setContentType(mimeType);
+		
+		//获取客户端的类型
+		String agent = ServletActionContext.getRequest().getHeader("User-Agent");
+		fileName = FileUtils.encodeDownloadFilename(fileName, agent);
+		ServletActionContext.getResponse().setHeader("content-disposition", "attachment;filename="+fileName);
+		workbook.write(outputStream);
+		return	NONE;
 	}
 }
 

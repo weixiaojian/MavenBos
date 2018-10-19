@@ -44,7 +44,8 @@
 	}
 	
 	function doExport(){
-		alert("导出");
+		//发送请求，请求action进行文件下载
+		window.location.href = "subareaAction_exprotXls.action";
 	}
 	
 	function doImport(){

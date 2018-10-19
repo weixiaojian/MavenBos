@@ -289,10 +289,10 @@
 						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
-						<td>选择负责人</td>
+						<td>选择取派员</td>
 						<td>
-							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+							<input class="easyui-combobox" name="staff.id"  
+    							data-options="valueField:'id',textField:'name',url:'staffAction_listAjax.action'" />  
 						</td>
 					</tr>
 					<tr height="300">
