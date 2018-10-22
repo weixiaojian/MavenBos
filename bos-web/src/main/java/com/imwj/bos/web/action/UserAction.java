@@ -24,9 +24,6 @@ import org.springframework.context.annotation.Scope;
 @Scope("prototype")
 public class UserAction extends BaseAction<User>  {
 
-	@Autowired
-	private ICustomerService porxy;
-	
 	//属性驱动，接收页面输入的验证码
 	private String checkcode;
 	public void setCheckcode(String checkcode) {
@@ -43,10 +40,6 @@ public class UserAction extends BaseAction<User>  {
 	 * @throws Exception
 	 */
 	public String login() throws Exception {
-//		WebService连接测试
-//		List<Customer> list = porxy.findAll();
-//		System.out.println(list);
-		
 		//得到session域中的验证码
 		String validatecode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		//先判断验证码是否输入正确

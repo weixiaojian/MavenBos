@@ -3,6 +3,7 @@ package com.imwj.bos.crm;
 
 import java.util.List;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -18,10 +19,24 @@ import javax.xml.ws.ResponseWrapper;
  */
 @WebService(name = "ICustomerService", targetNamespace = "http://service.imwj.com/")
 @XmlSeeAlso({
-//    ObjectFactory.class
+    //ObjectFactory.class
 })
 public interface ICustomerService {
 
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "assigncustomerstodecidedzone", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.Assigncustomerstodecidedzone")
+    @ResponseWrapper(localName = "assigncustomerstodecidedzoneResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.AssigncustomerstodecidedzoneResponse")
+    public void assigncustomerstodecidedzone(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        List<Integer> arg1);
 
     /**
      * 
@@ -33,5 +48,30 @@ public interface ICustomerService {
     @RequestWrapper(localName = "findAll", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindAll")
     @ResponseWrapper(localName = "findAllResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindAllResponse")
     public List<Customer> findAll();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<com.imwj.service.Customer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findListNotAssociation", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociation")
+    @ResponseWrapper(localName = "findListNotAssociationResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociationResponse")
+    public List<Customer> findListNotAssociation();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<com.imwj.service.Customer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findListHasAssociation", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListHasAssociation")
+    @ResponseWrapper(localName = "findListHasAssociationResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListHasAssociationResponse")
+    public List<Customer> findListHasAssociation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
 }

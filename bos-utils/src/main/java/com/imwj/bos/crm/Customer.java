@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>customer complex type的 Java 类。
+ * <p>customer complex type�� Java �ࡣ
  * 
- * <p>以下模式片段指定包含在此类中的预期内容。
+ * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
  * 
  * <pre>
  * &lt;complexType name="customer">
@@ -51,7 +51,7 @@ public class Customer {
     protected String telephone;
 
     /**
-     * 获取address属性的值。
+     * ��ȡaddress���Ե�ֵ��
      * 
      * @return
      *     possible object is
@@ -63,7 +63,7 @@ public class Customer {
     }
 
     /**
-     * 设置address属性的值。
+     * ����address���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
@@ -75,7 +75,7 @@ public class Customer {
     }
 
     /**
-     * 获取decidedzoneId属性的值。
+     * ��ȡdecidedzoneId���Ե�ֵ��
      * 
      * @return
      *     possible object is
@@ -87,7 +87,7 @@ public class Customer {
     }
 
     /**
-     * 设置decidedzoneId属性的值。
+     * ����decidedzoneId���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
@@ -99,7 +99,7 @@ public class Customer {
     }
 
     /**
-     * 获取id属性的值。
+     * ��ȡid���Ե�ֵ��
      * 
      */
     public int getId() {
@@ -107,7 +107,7 @@ public class Customer {
     }
 
     /**
-     * 设置id属性的值。
+     * ����id���Ե�ֵ��
      * 
      */
     public void setId(int value) {
@@ -115,7 +115,7 @@ public class Customer {
     }
 
     /**
-     * 获取name属性的值。
+     * ��ȡname���Ե�ֵ��
      * 
      * @return
      *     possible object is
@@ -127,7 +127,7 @@ public class Customer {
     }
 
     /**
-     * 设置name属性的值。
+     * ����name���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
@@ -139,7 +139,7 @@ public class Customer {
     }
 
     /**
-     * 获取station属性的值。
+     * ��ȡstation���Ե�ֵ��
      * 
      * @return
      *     possible object is
@@ -151,7 +151,7 @@ public class Customer {
     }
 
     /**
-     * 设置station属性的值。
+     * ����station���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
@@ -163,7 +163,7 @@ public class Customer {
     }
 
     /**
-     * 获取telephone属性的值。
+     * ��ȡtelephone���Ե�ֵ��
      * 
      * @return
      *     possible object is
@@ -175,7 +175,7 @@ public class Customer {
     }
 
     /**
-     * 设置telephone属性的值。
+     * ����telephone���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
@@ -185,24 +185,5 @@ public class Customer {
     public void setTelephone(String value) {
         this.telephone = value;
     }
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Customer [address=");
-		builder.append(address);
-		builder.append(", decidedzoneId=");
-		builder.append(decidedzoneId);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", station=");
-		builder.append(station);
-		builder.append(", telephone=");
-		builder.append(telephone);
-		builder.append("]");
-		return builder.toString();
-	}
 
 }
