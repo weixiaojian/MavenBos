@@ -26,20 +26,6 @@ public interface ICustomerService {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "assigncustomerstodecidedzone", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.Assigncustomerstodecidedzone")
-    @ResponseWrapper(localName = "assigncustomerstodecidedzoneResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.AssigncustomerstodecidedzoneResponse")
-    public void assigncustomerstodecidedzone(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        List<Integer> arg1);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<com.imwj.service.Customer>
      */
@@ -51,14 +37,17 @@ public interface ICustomerService {
 
     /**
      * 
+     * @param arg0
      * @return
-     *     returns java.util.List<com.imwj.service.Customer>
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findListNotAssociation", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociation")
-    @ResponseWrapper(localName = "findListNotAssociationResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociationResponse")
-    public List<Customer> findListNotAssociation();
+    @RequestWrapper(localName = "findDecidedzoneIdByAddress", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindDecidedzoneIdByAddress")
+    @ResponseWrapper(localName = "findDecidedzoneIdByAddressResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindDecidedzoneIdByAddressResponse")
+    public String findDecidedzoneIdByAddress(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
     /**
      * 
@@ -73,5 +62,44 @@ public interface ICustomerService {
     public List<Customer> findListHasAssociation(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "assigncustomerstodecidedzone", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.Assigncustomerstodecidedzone")
+    @ResponseWrapper(localName = "assigncustomerstodecidedzoneResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.AssigncustomerstodecidedzoneResponse")
+    public void assigncustomerstodecidedzone(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        List<Integer> arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns com.imwj.service.Customer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findCustomerByTelephone", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindCustomerByTelephone")
+    @ResponseWrapper(localName = "findCustomerByTelephoneResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindCustomerByTelephoneResponse")
+    public Customer findCustomerByTelephone(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<com.imwj.service.Customer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findListNotAssociation", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociation")
+    @ResponseWrapper(localName = "findListNotAssociationResponse", targetNamespace = "http://service.imwj.com/", className = "com.imwj.service.FindListNotAssociationResponse")
+    public List<Customer> findListNotAssociation();
 
 }
