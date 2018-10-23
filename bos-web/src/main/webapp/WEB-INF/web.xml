@@ -19,7 +19,7 @@
   	<filter-name>openSessionInView</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
-  
+
   <!-- 通过上下文参数指定spring配置文件位置 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>

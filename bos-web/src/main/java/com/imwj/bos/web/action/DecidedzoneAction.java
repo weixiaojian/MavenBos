@@ -63,7 +63,10 @@ public class DecidedzoneAction extends BaseAction<Decidedzone> {
 		return LIST;
 	}
 	
-	
+	/**
+	 * 定区中双击表格查看所点击的定区关联的客户
+	 * @param customerIds
+	 */
 	public void setCustomerIds(List<Integer> customerIds) {
 		this.customerIds = customerIds;
 	}

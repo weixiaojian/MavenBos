@@ -41,6 +41,14 @@ public class SubareaServiceImpl implements SubareaService{
 		dc.add(Restrictions.isNull("decidedzone"));
 		return subareaDao.findBycriteria(dc);
 	}
+
+	@Override
+	public List<Subarea> finAllBydecidedzoneId(String decidedzoneId) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Subarea.class);
+		//添加过滤条件
+		dc.add(Restrictions.eq("decidedzone.id", decidedzoneId));
+		return subareaDao.findBycriteria(dc);
+	}
 	
 	
 }

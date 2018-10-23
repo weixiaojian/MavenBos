@@ -157,6 +157,7 @@
 			url : "decidedzoneAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
+			//双击表格事件
 			onDblClickRow : doDblClickRow
 		});
 		
@@ -187,14 +188,13 @@
 		
 	});
 
-	function doDblClickRow(){
-		alert("双击表格数据...");
+	function doDblClickRow(index,data){
 		$('#association_subarea').datagrid( {
 			fit : true,
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "json/association_subarea.json",
+			url : "subareaAction_findListByDecidedzoneId.action?decidedzoneId="+data.id,
 			columns : [ [{
 				field : 'id',
 				title : '分拣编号',
@@ -256,7 +256,7 @@
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "json/association_customer.json",
+			url : "decidedzoneAction_findListHasAssociation.action?id="+data.id,
 			columns : [[{
 				field : 'id',
 				title : '客户编号',
