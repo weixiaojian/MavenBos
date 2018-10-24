@@ -51,7 +51,7 @@
 		</div>
 	</div>
 	<div region="center" style="overflow:auto;padding:5px;" border="false">
-		<form id="noticebillForm" action="" method="post">
+		<form id="noticebillForm" action="noticebillAction_add" method="post">
 			<table class="table-edit" width="95%" align="center">
 				<tr class="title">
 					<td colspan="4">客户信息</td>

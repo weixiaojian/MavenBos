@@ -56,6 +56,7 @@
 		
 		<!-- 业务通知单管理 -->
 		<action name="noticebillAction_*" class="noticebillAction" method="{1}">
+			<result name="noticebill_add">/WEB-INF/pages/qupai/noticebill_add.jsp</result>
 		</action>
 	</package>
 </struts>
