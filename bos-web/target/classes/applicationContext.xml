@@ -19,7 +19,6 @@
 						http://cxf.apache.org/jaxws 
 						http://cxf.apache.org/schemas/jaxws.xsd
 						">
-	
 	<!-- 加载属性文件 -->
 	<context:property-placeholder location="classpath:db.properties"/>
 				
@@ -68,5 +67,36 @@
 	<jaxws:client id="crmClient" 
 		serviceClass="com.imwj.bos.crm.ICustomerService" 
 		address="http://localhost:8080/crm-customer/service/customer"/>
+	
+	<!-- 配置shiro框架过滤工厂bean -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 注入安全管理器对象 -->
+		<property name="securityManager" ref="securityManager"></property>
+			<!-- 注入相关页面访问URL -->
+		<property name="loginUrl" value="/login.jsp"/><!-- 登陆页面 -->
+		<property name="successUrl" value="/index.jsp"/><!-- 首页 -->
+		<property name="unauthorizedUrl" value="/unauthorized.jsp"/><!-- 没有权限时提示页面 -->
+		<!--注入URL拦截规则 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/css/** = anon
+				/js/** = anon
+				/images/** = anon
+				/validatecode.jsp* = anon
+				/login.jsp = anon
+				/userAction_login.action = anon
+				/page_base_staff.action = perms["staff-list"]
+				/* = authc
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 注册安全管理对象 -->
+	<bean name="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="bosRealm"></property>
+	</bean>
+	
+	<!-- 注册realm -->
+	<bean name="bosRealm" class="com.imwj.bos.realm.BOSRealm"></bean>
 	
 </beans>

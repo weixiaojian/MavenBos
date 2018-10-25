@@ -1,24 +1,22 @@
 package com.imwj.bos.web.action;
 
-import com.imwj.bos.crm.Customer;
-import com.imwj.bos.crm.ICustomerService;
-import com.imwj.bos.domain.User;
-import com.imwj.bos.service.IUserService;
-import com.imwj.bos.utils.BOSUtils;
-import com.imwj.bos.web.action.base.BaseAction;
-import com.opensymphony.xwork2.ActionContext;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
-
-
-import org.springframework.stereotype.Controller;
-import org.apache.poi.util.SystemOutLogger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.imwj.bos.domain.User;
+import com.imwj.bos.service.IUserService;
+import com.imwj.bos.utils.BOSUtils;
+import com.imwj.bos.utils.MD5Utils;
+import com.imwj.bos.web.action.base.BaseAction;
 
 @Controller
 @Scope("prototype")
@@ -39,23 +37,32 @@ public class UserAction extends BaseAction<User>  {
 	 * @return
 	 * @throws Exception
 	 */
+	/**
+	 * @return
+	 * @throws Exception
+	 */
 	public String login() throws Exception {
 		//得到session域中的验证码
 		String validatecode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		//先判断验证码是否输入正确
 		if(StringUtils.isNotBlank(checkcode) && validatecode.equals(checkcode)){
 			//输入的验证码正确
-			User user = userService.login(model);
-			//判断用户名和密码是否正确
-			if(user!=null){
-				//登陆成功,将user放入session域跳转到首页
-				ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
-				return HOME;
-			}else{
-				//登陆失败
-				this.addActionError("用户名或密码错误");
+			//使用shiro框架提供的方式进行认证
+			Subject subject = SecurityUtils.getSubject();//获得当前登陆的用户对象，现在的状态未“未认证”
+			//用户名密码令牌
+			AuthenticationToken token = new UsernamePasswordToken(model.getUsername(), MD5Utils.md5(model.getPassword()));
+			try {
+				subject.login(token);
+			} catch (UnknownAccountException e) {
+				this.addActionError("用户名不存在");
+				return LOGIN;
+			} catch (IncorrectCredentialsException e) {
+				this.addActionError("密码输入错误");
 				return LOGIN;
 			}
+			User user = (User) subject.getPrincipal();
+			ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
+			return HOME;
 		}else{
 			//验证码输入不正确
 			this.addActionError("验证码输入错误");
