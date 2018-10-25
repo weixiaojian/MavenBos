@@ -3,6 +3,7 @@ package com.imwj.bos.web.action;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +33,6 @@ public class StaffAction extends BaseAction<Staff>  {
 	/**
 	 * 取派员列表分页显示
 	 */
-	
 	public String pageQuery() throws Exception {
 		staffService.findPageQuery(pageQuery);
 		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize","decidedzones"});
@@ -44,6 +44,7 @@ public class StaffAction extends BaseAction<Staff>  {
 	 * @return
 	 */
 	private String ids;
+	@RequiresPermissions("staff-delete")//执行这个方法需要当前的登陆用户拥有staff-delete的权限
 	public String deleteBatch(){
 		staffService.deleteBatchByIdes(ids);
 		return LIST;
@@ -53,6 +54,7 @@ public class StaffAction extends BaseAction<Staff>  {
 	 * 取派员修改
 	 * @return
 	 */
+	@RequiresPermissions("staff-edit")
 	public String edit(){
 		//先根据id查询
 		Staff staff = staffService.findStaffById(model.getId());
