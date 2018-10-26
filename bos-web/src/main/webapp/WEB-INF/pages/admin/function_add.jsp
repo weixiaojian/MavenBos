@@ -83,7 +83,12 @@
 					<tr>
 						<td>父功能点</td>
 						<td>
-							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'name',url:'functionAction_ajaxList.action'"/>
+							<!-- <input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',
+							textField:'name',url:'functionAction_ajaxList.action'"/> -->
+							 
+							 <input class="easyui-combotree" name="parentFunction.id"
+							 	data-options="url:'roleAction_listAjax.action'" 
+							 	style="width:170px;">
 						</td>
 					</tr>
 					<tr>
