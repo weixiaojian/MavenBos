@@ -42,5 +42,4 @@ public class BOSRealm extends AuthorizingRealm{
 		//TODO 后期需要修改为根据当前登录用户查询数据库，获取实际对应的权限
 		return info;
 	}
-
 }

@@ -52,7 +52,7 @@ public class UserAction extends BaseAction<User>  {
 			//用户名密码令牌
 			AuthenticationToken token = new UsernamePasswordToken(model.getUsername(), MD5Utils.md5(model.getPassword()));
 			try {
-				subject.login(token);
+				subject.login(token);//此处会跳转到我们所创建的realm
 			} catch (UnknownAccountException e) {
 				this.addActionError("用户名不存在");
 				return LOGIN;
