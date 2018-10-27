@@ -40,6 +40,7 @@
 		<!-- 用户管理 -->
 		<action name="userAction_*" class="userAction" method="{1}">
 			<result name="home">/index.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/userindex.jsp</result>
 		</action>
 		
 		<!-- 取件员管理 -->
@@ -77,7 +78,7 @@
 		
 		<!-- 角色管理 -->
 		<action name="roleAction_*" class="roleAction" method="{1}">
-			<result name="list">/WEB-INF/pages/admin/function.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/role.jsp</result>
 		</action>
 	</package>
 </struts>

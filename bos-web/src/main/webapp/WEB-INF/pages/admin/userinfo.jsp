@@ -30,7 +30,10 @@
 	$(function(){
 		$("body").css({visibility:"visible"});
 		$('#save').click(function(){
-			$('#form').submit();
+			var v = $("#roleForm").form("validate");
+			if(v){
+				$('#roleForm').submit();
+			}
 		});
 	});
 </script>	
@@ -42,11 +45,11 @@
 		</div>
 	</div>
     <div region="center" style="overflow:auto;padding:5px;" border="false">
-       <form id="form" method="post" >
+       <form id="roleForm" method="post" action="userAction_add.action">
            <table class="table-edit"  width="95%" align="center">
            		<tr class="title"><td colspan="4">基本信息</td></tr>
 	           	<tr><td>用户名:</td><td><input type="text" name="username" id="username" class="easyui-validatebox" required="true" /></td>
-					<td>口令:</td><td><input type="password" name="password" id="password" class="easyui-validatebox" required="true" validType="minLength[5]" /></td></tr>
+					<td>密码:</td><td><input type="password" name="password" id="password" class="easyui-validatebox" required="true" validType="minLength[5]" /></td></tr>
 				<tr class="title"><td colspan="4">其他信息</td></tr>
 	           	<tr><td>工资:</td><td><input type="text" name="salary" id="salary" class="easyui-numberbox" /></td>
 					<td>生日:</td><td><input type="text" name="birthday" id="birthday" class="easyui-datebox" /></td></tr>
@@ -73,7 +76,22 @@
 						<input type="text" name="telephone" id="telephone" class="easyui-validatebox" required="true" />
 					</td>
 				</tr>
-	           	<tr><td>备注:</td><td colspan="3"><textarea style="width:80%"></textarea></td></tr>
+	           	<tr><td>备注:</td><td colspan="3"><textarea name="remark" style="width:80%"></textarea></td></tr>
+	           	<tr><td>选择角色:</td>
+	           		<td colspan="3" id="roleTD">
+	           			<script type="text/javascript">
+	           				$(function(){
+	           					$.post("roleAction_listAjax2.action",function(data){
+	           						for(var i=0;i<data.length;i++){
+	           							var id = data[i].id;
+	           							var name = data[i].name;
+	           							$("#roleTD").append('<input type="checkbox" id="'+id+'" name="roleIds" value="'+id+'"><label for="'+id+'">'+name+'</label>&nbsp;&nbsp;');
+	           						}
+	           					});
+	           				});
+	           			</script>
+	           		</td>
+	           	</tr>
            </table>
        </form>
 	</div>

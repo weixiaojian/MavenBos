@@ -100,4 +100,16 @@ public class UserAction extends BaseAction<User>  {
 		return NONE;
 	}
 	
+	/**
+	 * 添加用户
+	 */
+	private String[] roleIds;
+	public String add(){
+		userService.save(model,roleIds);
+		return LIST;
+	}
+
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
 }
