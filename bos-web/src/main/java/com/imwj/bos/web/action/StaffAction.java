@@ -44,7 +44,7 @@ public class StaffAction extends BaseAction<Staff>  {
 	 * @return
 	 */
 	private String ids;
-	@RequiresPermissions("staff-delete")//执行这个方法需要当前的登陆用户拥有staff-delete的权限
+	@RequiresPermissions("staff")//执行这个方法需要当前的登陆用户拥有staff的权限
 	public String deleteBatch(){
 		staffService.deleteBatchByIdes(ids);
 		return LIST;
@@ -54,7 +54,7 @@ public class StaffAction extends BaseAction<Staff>  {
 	 * 取派员修改
 	 * @return
 	 */
-	@RequiresPermissions("staff-edit")
+	@RequiresPermissions("staff")
 	public String edit(){
 		//先根据id查询
 		Staff staff = staffService.findStaffById(model.getId());

@@ -80,7 +80,7 @@
 		iconCls : 'icon-add',
 		handler : doAdd
 	}, 
-	<shiro:hasPermission name="staff-delete">
+	<shiro:hasPermission name="staff">
 	{
 		id : 'button-delete',
 		text : '作废',

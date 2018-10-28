@@ -85,7 +85,7 @@
 				/validatecode.jsp* = anon
 				/login.jsp = anon
 				/userAction_login.action = anon
-				/page_base_staff.action = perms["staff-list"]
+				/page_base_staff.action = perms["staff"]
 				/* = authc
 			</value>
 		</property>
@@ -94,6 +94,13 @@
 	<!-- 注册安全管理对象 -->
 	<bean name="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="bosRealm"></property>
+		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+	
+	<!-- 注册缓存管理器 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- 注入ehcache的配置文件 -->
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
 	</bean>
 	
 	<!-- 注册realm -->
