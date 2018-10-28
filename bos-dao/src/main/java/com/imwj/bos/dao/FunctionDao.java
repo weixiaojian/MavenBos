@@ -8,4 +8,6 @@ import com.imwj.bos.domain.Function;
 public interface FunctionDao extends IBaseDao<Function>{
 	
 	public List<Function> findAll();
+
+	public List<Function> findFunctionByUserId(String id);
 }

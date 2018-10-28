@@ -19,4 +19,11 @@ public class FunctionDaoImpl extends BaseDaoImpl<Function> implements FunctionDa
 		List<Function> list = (List<Function>) this.getHibernateTemplate().find(hql);
 		return list;
 	}
+
+	public List<Function> findFunctionByUserId(String id) {
+		String hql = "SELECT DISTINCT f From Function f LEFT OUTER JOIN f.roles"
+				+ " r LEFT OUTER JOIN r.users u WHERE u.id = ?";
+		List<Function> list = (List<Function>) this.getHibernateTemplate().findByNamedQuery(hql, id);
+		return list;
+	}
 }
