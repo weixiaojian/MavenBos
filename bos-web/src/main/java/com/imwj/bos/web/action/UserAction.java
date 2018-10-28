@@ -108,6 +108,16 @@ public class UserAction extends BaseAction<User>  {
 		userService.save(model,roleIds);
 		return LIST;
 	}
+	
+	/**
+	 * 用户列表分页显示
+	 * @param roleIds
+	 */
+	public String pageQuery(){
+		userService.pageQuery(pageQuery);
+		this.javaToJson(pageQuery, new String[]{"noticebills","roles"});
+		return NONE;
+	}
 
 	public void setRoleIds(String[] roleIds) {
 		this.roleIds = roleIds;

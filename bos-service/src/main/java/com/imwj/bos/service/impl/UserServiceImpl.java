@@ -9,6 +9,7 @@ import com.imwj.bos.domain.Role;
 import com.imwj.bos.domain.User;
 import com.imwj.bos.service.IUserService;
 import com.imwj.bos.utils.MD5Utils;
+import com.imwj.bos.utils.PageQuery;
 
 @Service
 @Transactional
@@ -47,6 +48,10 @@ public class UserServiceImpl implements IUserService{
 				model.getRoles().add(role);
 			}
 		}
+	}
+
+	public void pageQuery(PageQuery pageQuery) {
+		userDao.findPageQuery(pageQuery);
 	}
 	
 }

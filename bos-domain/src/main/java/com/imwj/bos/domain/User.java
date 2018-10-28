@@ -1,5 +1,6 @@
 package com.imwj.bos.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class User implements java.io.Serializable {
 	private String telephone;
 	private String remark;
 	private Set noticebills = new HashSet(0);
-	private Set roles = new HashSet(0);
+	private Set<Role> roles = new HashSet(0);
 
 	// Constructors
 
@@ -51,6 +52,25 @@ public class User implements java.io.Serializable {
 		this.noticebills = noticebills;
 		this.roles = roles;
 	}
+	
+	//用户列表分页显示，扩展方法
+	public String getRoleNames(){
+		String roleNames = "";
+		for (Role role : roles) {
+			roleNames += role.getName()+"  ";
+		}
+		return roleNames;
+	}
+	public String getBirthdayString(){
+		if(birthday != null){
+			String data = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+			return data;
+		}else{
+			return "暂无数据";
+		}
+	}
+	
+	
 
 	// Property accessors
 
