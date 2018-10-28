@@ -32,6 +32,14 @@ public class Function implements java.io.Serializable {
 		super();
 		this.id = id;
 	}
+	
+	public String getpId(){
+		if(parentFunction == null){
+			return "0";
+		}
+		return parentFunction.getId();
+	}
+	
 	public String getId() {
 		return id;
 	}

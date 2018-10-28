@@ -13,4 +13,6 @@ public interface FunctionService {
 
 	void pageQuery(PageQuery pageQuery);
 
+	List<Function> findMenuAll();
+
 }

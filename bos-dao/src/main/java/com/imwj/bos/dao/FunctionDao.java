@@ -10,4 +10,8 @@ public interface FunctionDao extends IBaseDao<Function>{
 	public List<Function> findAll();
 
 	public List<Function> findFunctionByUserId(String id);
+
+	public List<Function> findAllMenu();
+
+	public List<Function> findAllMenuByUserId(String userId);
 }
