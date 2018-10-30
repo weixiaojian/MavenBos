@@ -180,6 +180,16 @@
 	        height: 400,
 	        resizable:false
 	    });
+		// 添加、修改分区
+		$('#editSubareaWindow').window({
+	        title: '添加修改分区',
+	        width: 600,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 400,
+	        resizable:false
+	    });
 		
 		// 查询分区
 		$('#searchWindow').window({
@@ -203,8 +213,11 @@
 		
 	});
 	
-	function doDblClickRow(){
-		alert("双击表格数据...");
+	function doDblClickRow(rowIndex, rowData){
+		//打开修改取派员窗口
+		$('#editSubareaWindow').window("open");
+		//使用form表单对象的load方法回显数据
+		$("#editSubareaWindow").form("load",rowData);
 	}
 </script>	
 </script>
@@ -213,7 +226,7 @@
 	<div region="center" border="false">
     	<table id="grid"></table>
 	</div>
-	<!-- 添加 修改分区 -->
+	<!-- 添加分区 -->
 	<div class="easyui-window" title="分区添加修改" id="addSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
@@ -301,6 +314,64 @@
 					</tr>
 					<tr>
 						<td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a> </td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<!-- 修改分区 -->
+	<div class="easyui-window" title="分区修改" id="editSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="editSave" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存修改</a>
+				<script type="text/javascript">
+					$(function(){
+						$("#editSave").click(function(){
+							alert("修改");
+						});
+					});
+				</script>
+			</div>
+		</div>
+		
+		<div style="overflow:auto;padding:5px;" border="false">
+			<form id="addSubareaForm" action="#" method="post">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">分区信息</td>
+					</tr>
+					<tr>
+						<td>选择区域</td>
+						<td>
+							<input class="easyui-combobox" name="region.id"  
+    							data-options="valueField:'id',textField:'name',mode:'remote',url:'regionAction_listAjax.action'" />  
+						</td>
+					</tr>
+					<tr>
+						<td>关键字</td>
+						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>起始号</td>
+						<td><input type="text" name="startnum" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>终止号</td>
+						<td><input type="text" name="endnum" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>单双号</td>
+						<td>
+							<select class="easyui-combobox" name="single" style="width:150px;">  
+							    <option value="0">单双号</option>  
+							    <option value="1">单号</option>  
+							    <option value="2">双号</option>  
+							</select> 
+						</td>
+					</tr>
+					<tr>
+						<td>位置信息</td>
+						<td><input type="text" name="position" class="easyui-validatebox" required="true" style="width:250px;"/></td>
 					</tr>
 				</table>
 			</form>
