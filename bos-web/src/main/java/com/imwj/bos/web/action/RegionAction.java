@@ -103,6 +103,15 @@ public class RegionAction extends BaseAction<Region> {
 		return NONE;
 	}
 	
+	/**
+	 * 区域添加
+	 * @param regionFile
+	 */
+	public String add(){
+		regionService.add(model);
+		return LIST;
+	}
+	
 	public void setRegionFile(File regionFile) {
 		this.regionFile = regionFile;
 	}

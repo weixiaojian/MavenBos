@@ -50,6 +50,7 @@
 		
 		<!-- 区域设置 -->
 		<action name="regionAction_*" class="regionAction" method="{1}">
+			<result name="list">/WEB-INF/pages/base/region.jsp</result>
 		</action>
 		
 		<!-- 区域设置 -->

@@ -41,4 +41,9 @@ public class RegionServiceImpl implements IRegionService{
 	public List<Region> finAll() {
 		return regionDao.findAll();
 	}
+
+	@Override
+	public void add(Region model) {
+		regionDao.save(model);
+	}
 }

@@ -16,4 +16,6 @@ public interface IRegionService {
 
 	List<Region> finAll();
 
+	void add(Region model);
+
 }

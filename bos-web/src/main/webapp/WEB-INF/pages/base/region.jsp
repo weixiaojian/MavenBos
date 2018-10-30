@@ -139,6 +139,15 @@
 			action:'regionAction_importXls.action',
 			name:'regionFile'
 		});
+		
+		//区域添加
+		$("#save").click(function(){
+			//alert("添加");
+			var v = $("#addRegionForm").form("validate");
+			if(v){
+				$("#addRegionForm").submit();
+			}
+		});
 	});
 </script>	
 </head>
@@ -146,7 +155,7 @@
 	<div region="center" border="false">
     	<table id="grid"></table>
 	</div>
-	<div class="easyui-window" title="区域添加修改" id="addRegionWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+	<div class="easyui-window" title="区域添加" id="addRegionWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
@@ -154,10 +163,14 @@
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addRegionForm" action="regionAction_add.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">区域信息</td>
+					</tr>
+					<tr>
+						<td>id</td>
+						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>省</td>
