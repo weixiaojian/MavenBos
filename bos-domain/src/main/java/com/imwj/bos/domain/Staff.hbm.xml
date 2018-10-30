@@ -36,4 +36,8 @@
     <query name="staff.delete">
     	UPDATE Staff SET deltag = '1' WHERE id = ?
     </query>
+     <!-- 取派员逻辑还原 -->
+    <query name="staff.result">
+    	UPDATE Staff SET deltag = '0' WHERE id = ?
+    </query>
 </hibernate-mapping>

@@ -19,4 +19,6 @@ public interface StaffService {
 
 	List<Staff> finAllNoDelet();
 
+	void reductionByIdes(String ids);
+
 }

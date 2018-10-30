@@ -3,8 +3,11 @@ package com.imwj.bos.web.action;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -31,9 +34,21 @@ public class StaffAction extends BaseAction<Staff>  {
 	}
 	
 	/**
-	 * 取派员列表分页显示
+	 * 取派员列表分页显示(带查询功能)
 	 */
 	public String pageQuery() throws Exception {
+		DetachedCriteria dc = pageQuery.getDetachedCriteria();
+		//动态添加过滤条件
+		String name = model.getName();
+		String telephone = model.getTelephone();
+		if(StringUtils.isNotBlank(name)){
+			//添加过滤条件，根据地址name模糊查询
+			dc.add(Restrictions.like("name", "%"+name+"%"));
+		}
+		if(StringUtils.isNotBlank(telephone)){
+			//添加过滤条件，根据telephone模糊查询
+			dc.add(Restrictions.like("telephone", "%"+telephone+"%"));
+		}
 		staffService.findPageQuery(pageQuery);
 		this.javaToJson(pageQuery, new String[]{"currentPage","detachedCriteria","pageSize","decidedzones"});
 		return NONE;
@@ -47,6 +62,15 @@ public class StaffAction extends BaseAction<Staff>  {
 	@RequiresPermissions("staff")//执行这个方法需要当前的登陆用户拥有staff的权限
 	public String deleteBatch(){
 		staffService.deleteBatchByIdes(ids);
+		return LIST;
+	}
+	
+	/**
+	 * 将取派员还原
+	 * @return
+	 */
+	public String reduction(){
+		staffService.reductionByIdes(ids);
 		return LIST;
 	}
 	

@@ -59,4 +59,15 @@ public class StaffServiceImpl implements StaffService {
 		return staffDao.findBycriteria(dc);
 	}
 
+
+	@Override
+	public void reductionByIdes(String ids) {
+		if(StringUtils.isNotBlank(ids)){
+			String[] staffIds = ids.split(",");
+			for (String id : staffIds) {
+				staffDao.excuteUpdate("staff.result", id);
+			}
+		}
+	}
+
 }
